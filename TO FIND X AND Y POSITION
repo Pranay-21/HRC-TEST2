@@ -1,0 +1,36 @@
+
+import java.util.*;
+
+public class Question1 {
+
+	public static void main(String[] args) {
+
+		Scanner scan = new Scanner(System.in);
+
+		int lnum = Integer.parseInt(scan.nextLine());
+		ArrayList<ArrayList> la = new ArrayList<ArrayList>();
+
+		for (int i = 0; i < lnum; i++) {
+			int total = scan.nextInt();
+			ArrayList<Integer> numla = new ArrayList<Integer>();
+
+			for (int j = 0; j < total; j++) {
+				numla.add(new Integer(scan.nextInt()));
+			}
+			la.add(numla);
+			scan.nextLine();
+		}
+		int line2 = Integer.parseInt(scan.nextLine());
+		for (int i = 0; i < line2; i++) {
+			int posx = scan.nextInt() - 1;
+			int posy = scan.nextInt() - 1;
+			scan.nextLine();
+			if (posx < la.size() && posy < la.get(posx).size()) {
+				System.out.println(la.get(posx).get(posy));
+			} else {
+				System.out.println("ERROR!");
+			}
+		}
+		scan.close();
+	}
+}

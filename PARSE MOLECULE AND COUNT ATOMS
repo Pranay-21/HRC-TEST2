@@ -1,0 +1,70 @@
+
+import java.util.*;
+
+class Question2 {
+
+	static void getCount(String str) {
+		Map<String, Integer> map = new LinkedHashMap<String, Integer>();
+
+		for (int i = 0; i < str.length(); i++) {
+			int c = 0;
+			char ch = str.charAt(i);
+			String receive1 = " ";
+			receive1 = String.valueOf(ch);
+
+			if (receive1.matches("[A-Z]")) {
+
+				for (int j = i + 1; j < str.length(); j++) {
+
+					char receive2 = str.charAt(j);
+					String match = String.valueOf(receive2);
+
+					if (match.matches("[a-z]")) {
+
+						receive1 += match;
+
+						if (map.get(receive1) == null)
+							map.put(receive1, 1);
+						else
+							map.put(receive1, map.get(receive2) + 1);
+						c = 1;
+					}
+
+					else if (match.matches("[\\d]")) {
+
+						int see = Integer.parseInt(match);
+						map.put(receive1, see);
+						c = 1;
+					}
+
+					else {
+						i = j - 1;
+						break;
+					}
+				}
+
+				if (c == 0) {
+					if (map.get(receive1) == null)
+						map.put(receive1, 1);
+					else
+						map.put(receive1, map.get(receive1) + 1);
+				}
+			}
+		}
+
+		System.out.print("Atoms present are: ");
+		System.out.print("{");
+		for (Map.Entry<String, Integer> element : map.entrySet())
+			System.out.print(element.getKey()+"="+element.getValue()+" ");
+		System.out.print("}");
+		map.clear();
+	}
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		String str = sc.next();
+		System.out.println("Entered molecule is : " + str);
+		getCount(str);
+	}
+}

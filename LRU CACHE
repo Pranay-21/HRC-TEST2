@@ -1,0 +1,54 @@
+import java.util.Deque;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Iterator;
+
+public class Question5 {
+	private Deque<Integer> doublyQueue;
+
+	private HashSet<Integer> hs;
+
+	private final int cache_size;
+
+	Question5(int capacity) {
+		doublyQueue = new LinkedList<>();
+		hs = new HashSet<>();
+		cache_size = capacity;
+	}
+
+	public void refer(int page) {
+		if (!hs.contains(page)) {
+			if (doublyQueue.size() == cache_size) {
+				int last = doublyQueue.removeLast();
+				hs.remove(last);
+			}
+		} else {
+			doublyQueue.remove(page);
+		}
+		doublyQueue.push(page);
+		hs.add(page);
+	}
+
+	public void display() {
+		Iterator<Integer> itrer = doublyQueue.iterator();
+		while (itrer.hasNext()) {
+			System.out.print(itrer.next() + " ");
+		}
+	}
+
+	public static void main(String[] args) {
+		Question5 caches = new Question5(6);
+		caches.refer(1);
+		caches.refer(2);
+		caches.refer(2);
+		caches.refer(2);
+		caches.refer(3);
+		caches.refer(1);
+		caches.refer(4);
+		caches.refer(5);
+		caches.refer(1);
+		caches.refer(2);
+		caches.refer(1);
+		caches.display();
+	}
+}

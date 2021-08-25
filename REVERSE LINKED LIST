@@ -1,0 +1,48 @@
+import java.util.LinkedList;
+
+class Question4 {
+	static Node head;
+
+	static class Node {
+		int data;
+		Node next;
+		Node(int da) {
+			data = da;
+			next = null;
+		}
+	}
+	Node reverse_list(Node node) {
+		Node prev = null;
+		Node current = node;
+		Node next = null;
+		while (current != null) {
+			next = current.next;
+			current.next = prev;
+			prev = current;
+			current = next;
+		}
+		node = prev;
+		return node;
+	}
+	void showList(Node node) {
+		while (node != null) {
+			System.out.print(node.data + " ");
+			node = node.next;
+		}
+	}
+	public static void main(String[] args) {
+		Question4 list = new Question4();
+		list.head = new Node(1);
+		list.head.next = new Node(2);
+		list.head.next.next = new Node(3);
+		list.head.next.next.next = new Node(4);
+		list.head.next.next.next.next = new Node(5);
+
+		System.out.println("provided list: ");
+		list.showList(head);
+		head = list.reverse_list(head);
+		System.out.println("");
+		System.out.println("reversed list:");
+		list.showList(head);
+	}
+}
